@@ -6,7 +6,7 @@
 #define Nk 4
 #define Nr 10
 #define NSAMPLES 5000
-#define TARGETBYTE 3
+#define TARGETBYTE 4
 
 unsigned char in[16], out[16], state[4][4];
 
@@ -233,7 +233,7 @@ void UpdateBin0(int cipherCount){
 	for(i = 0; i < 12; i++){
 		SumBin0[i] += Sample[cipherCount][i];
 	}
-	CountBin0++;
+	CountBin0+= FreqSample[cipherCount];
 } 
 
 void UpdateBin1(int cipherCount){
@@ -242,7 +242,7 @@ void UpdateBin1(int cipherCount){
 	for(i = 0; i < 12; i++){
 		SumBin1[i]+= Sample[cipherCount][i];
 	}
-	CountBin1++;
+	CountBin1+= FreqSample[cipherCount];
 }
 
 void GetKeyBias(int keyVal){
@@ -256,7 +256,7 @@ void GetKeyBias(int keyVal){
 
 	for(i = 0; i < 12; i++){
 		
-		meanDiff = Sumbin1[i]/CountBin1 - Sumbin0[i]/CountBin[0];
+		meanDiff = (double)SumBin1[i]/CountBin1 - (double)SumBin0[i]/CountBin0;
 		if(meanDiff < 0.0){
 			meanDiff = -1.0 * meanDiff;
 		}
