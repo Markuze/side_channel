@@ -6,7 +6,7 @@
 #define Nk 4
 #define Nr 10
 #define NSAMPLES 5000
-#define TARGETBYTE 4
+//#define TARGETBYTE 1
 
 unsigned char in[16], out[16], state[4][4];
 
